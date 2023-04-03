@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserGroupController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('groups',[UserGroupController::class , 'index']);
+Route::get('groups/create',[UserGroupController::class , 'create']);
+Route::post('groups',[UserGroupController::class , 'store']);
+Route::delete('groups/{id}',[UserGroupController::class , 'destroy']);
+Route::get('users', [UserController::class ,'index']);
+
