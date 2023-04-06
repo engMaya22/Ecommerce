@@ -10,7 +10,7 @@
       
     <div class="row justify-content-center">
        <div class="md-col-6">
-          <form  method="POST" action="{{url('groups')}}">
+          <form  method="POST" action="{{url('groups/store')}}">
             @csrf
             <div class="form-group">
               <label for="title">User Group Title:</label>

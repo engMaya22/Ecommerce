@@ -39,7 +39,7 @@
                             <td>{{$group->id}}</td>
                             <td>{{$group->title}}</td>
                             <td class="text-right">
-                                <form action="{{url('groups/'.$group->id)}}" method="POST">
+                                <form action="{{url('groups/delete/'.$group->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                  <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure')">    <a  class="btn btn-danger"> <i class="fa fa-trash"> </i> Delete</a></button>
