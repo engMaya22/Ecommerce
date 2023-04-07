@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,7 +30,9 @@ class UserController extends Controller
     public function create()
     {
        $this->data['groups'] = Group::pluck('title','id');
-       return view('users.create',$this->data);
+       $this->data['mode']   = 'create';
+       $this->data['headline'] = 'Add New User';
+       return view('users.form',$this->data);
     }
 
     /**
@@ -42,7 +45,7 @@ class UserController extends Controller
     {
         $request->validated();
        if( User::create($request->validated())){
-        Session::flash('message','User Added Successfully');
+         Session::flash('message','User Added Successfully');
        }
        return  redirect()->to('users');
     }
@@ -55,7 +58,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return 'welcome edit';
+        $this->data['user'] = User::find($id);
+        return view('users.show',$this->data);
     }
 
     /**
@@ -66,7 +70,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->data['user'] = User::findOrFail($id);
+        $this->data['groups'] = Group::pluck('title','id');
+        $this->data['mode']   = 'edit';
+        $this->data['headline'] = 'Update Information';
+        return view('users.form',$this->data);
     }
 
     /**
@@ -76,9 +84,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
-        //
+       $data = $request->validated();
+       $user = User::find($id);
+       if($user->update($data)){
+        Session::flash('message','User Updated Successfully');
+       }
+       return  redirect()->to('users');
     }
 
     /**
@@ -88,7 +101,12 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {  
+        if( User::find($id)->delete() ) {
+            Session::flash('message', 'User Deleted Successfully');
+        }
+        
+        return redirect()->to('users');
+        
     }
 }

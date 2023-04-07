@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('phone',15)->nullable();
             $table->string('address',200)->nullable();
             $table->foreignId('admin_id')->nullable();
+            // $table->unsignedBigInteger('group_id');
             $table->foreignId('group_id');
-            // $table->foreign('group_id')->references('id')->on('groups');
             $table->timestamps();
         });
     }

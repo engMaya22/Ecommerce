@@ -42,7 +42,7 @@
                                 <form action="{{url('groups/delete/'.$group->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure')">    <a  class="btn btn-danger"> <i class="fa fa-trash"> </i> Delete</a></button>
+                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure?')">    <a  class="btn btn-danger"> <i class="fa fa-trash"> </i> Delete</a></button>
                                 </form>
                             
                             </td>

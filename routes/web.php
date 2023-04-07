@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\User\UserGroupController;
 use App\Http\Controllers\UserController;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,38 +18,35 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+ //Login
+Route::get('login',[LoginController::class , 'login'])->name('login');
+Route::post('login',[LoginController::class , 'authenticate'])->name('login.confirm');
+Route::group(['middleware'=> 'auth'],function(){
+    Route::get('dashboard', function () {
+        return view('welcome');
+    });
+    
+   
+    Route::get('logout',[LoginController::class , 'logout'])->name('logout');
+    
+    
+    Route::resource('users', UserController::class);
+    
+    Route::group(['prefix' => 'groups'], function () {
+        Route::get('/',[UserGroupController::class ,'index']);
+        Route::get('/create',[UserGroupController::class , 'create']);
+        Route::post('store',[UserGroupController::class , 'store']);
+        Route::delete('delete/{id}',[UserGroupController::class , 'delete']);
+    
+    });
+    Route::resource('categories',CategoryController::class);
+    Route::resource('products',ProductController::class);
+}
+   
+    
+);
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::group(['prefix' => 'groups'], function () {
-    Route::get('/',[UserGroupController::class ,'index']);
-    Route::get('/create',[UserGroupController::class , 'create']);
-    Route::post('store',[UserGroupController::class , 'store']);
-    Route::delete('delete/{id}',[UserGroupController::class , 'destroy']);
 
-});
-
-
-
-
-
-
-Route::group(['prefix' => 'users'], function () {
-    Route::get('/',[UserController::class ,'index']);
-    Route::get('show/{id}',[UserController::class ,'show']);
-    Route::get('/create',[UserController::class ,'create']);
-    Route::post('store',[UserController::class ,'store']);
-    Route::get('edit/{id}',[UserController::class ,'edit']);
-    Route::put('update/{id}',[UserController::class ,'update']);
-    Route::delete('delete/{id}',[UserController::class ,'destroy']);
-
-
-
-});
-// Route::resource('products',[ProductController::class ,'index']);
-
- Route::resource('users',UserController::class);
 
 
 

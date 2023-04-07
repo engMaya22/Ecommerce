@@ -27,7 +27,7 @@ class UserGroupController extends Controller
       return  redirect()->to('groups');
     }
 
-    public function destroy($id){
+    public function delete($id){
      if(Group::find($id)->delete()){
         Session::flash('message','Group Deleted Successfully');
      }
