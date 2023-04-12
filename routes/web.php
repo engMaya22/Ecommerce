@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\User\UserGroupController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserSalesController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,7 @@ Route::group(['middleware'=> 'auth'],function(){
     
     
     Route::resource('users', UserController::class);
+    Route::get('user/{id}/sales',[UserSalesController::class , 'index'])->name('user.sales');
     
     Route::group(['prefix' => 'groups'], function () {
         Route::get('/',[UserGroupController::class ,'index']);

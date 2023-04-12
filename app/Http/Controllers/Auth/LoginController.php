@@ -26,6 +26,7 @@ class LoginController extends Controller
         return redirect()->route('login')->withErrors(['msg','Invalid  username and password']);
       }
     }
+    
     public function logout(){
         Auth::logout();
         return redirect()->route('login');
