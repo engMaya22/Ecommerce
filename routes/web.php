@@ -5,6 +5,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\User\UserGroupController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserPaymentController;
+use App\Http\Controllers\UserPurchaseController;
+use App\Http\Controllers\UserReceiptController;
 use App\Http\Controllers\UserSalesController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +36,9 @@ Route::group(['middleware'=> 'auth'],function(){
     
     Route::resource('users', UserController::class);
     Route::get('user/{id}/sales',[UserSalesController::class , 'index'])->name('user.sales');
-    
+    Route::get('user/{id}/purchases',[UserPurchaseController::class , 'index'])->name('user.purchases');
+    Route::get('user/{id}/payments',[UserPaymentController::class   , 'index'])->name('user.payments');
+    Route::get('user/{id}/receipts',[UserReceiptController::class   , 'index'])->name('user.receipts');
     Route::group(['prefix' => 'groups'], function () {
         Route::get('/',[UserGroupController::class ,'index']);
         Route::get('/create',[UserGroupController::class , 'create']);

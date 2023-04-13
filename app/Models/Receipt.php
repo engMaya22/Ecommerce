@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Receipt extends Model
 {
     use HasFactory;
+    public function admin(){
+        return $this->belongsTo(Admin::class);
+    }
 }
