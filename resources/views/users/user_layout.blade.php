@@ -8,8 +8,13 @@
 		</div>	
 		<div class="col-md-8 text-right">
 			<a class="btn btn-info" href="{{ url('users/create') }}"> <i class="fa fa-plus"></i> New Sale </a>
-			<a class="btn btn-info" href="{{ url('users/create') }}"> <i class="fa fa-plus"></i> New Purchase </a>
-			<a class="btn btn-info" href="{{ url('users/create') }}"> <i class="fa fa-plus"></i> New Payment </a>
+			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#newPurchase">
+				<i class="fa fa-plus"></i>New Purchase
+			</button>
+				<!-- Button trigger modal -->
+			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#newPayment">
+				<i class="fa fa-plus"></i>New Payment
+			</button>
 			<a class="btn btn-info" href="{{ url('users/create') }}"> <i class="fa fa-plus"></i> New Receipt </a>
 		</div>
 	</div>

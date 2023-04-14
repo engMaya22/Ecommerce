@@ -1,15 +1,5 @@
 @extends('layout.main')
-
- @section('main_content')
- {{-- @if ($errors->any())
-	    <div class="alert alert-danger">
-	        <ul>
-	            @foreach ($errors->all() as $error)
-	                <li>{{ $error }}</li>
-	            @endforeach
-	        </ul>
-	    </div>
- @endif --}}
+@section('main_content')
   <h2> {{ $headline }}</h2>
   <div class="card shadow mb-4">
     <div class="card-header py-3">
