@@ -13,31 +13,30 @@
 		        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 		          <thead>
 		            <tr>
-		              <th>Admin</th>
-		              <th>Amount</th>
+					  <th>Admin</th>
 		              <th>Date</th>
+					  <th class="text-right">Amount</th>
 		              <th>Note</th>
 		              <th class="text-right">Actions</th>
 		            </tr>
 		          </thead>
 		          <tfoot>
-		            <tr>
-                        <th>Admin</th>
-                        <th>Amount</th>
-                        <th>Date</th>
-                        <th>Note</th>
-		              <th class="text-right">Actions</th>
-		            </tr>
+					<tr>
+						<th colspan="2" class="text-right">Total : </th>
+						<th class="text-right"> {{ $user->receipts->sum('amount') }} </th>
+						<th></th>
+						<th></th>
+						</tr>
 		          </tfoot>
 		          <tbody>
 		          	@foreach ($user->receipts as $receipt)
 			            <tr>
-			              <td> {{ $receipt->admin->name }} </td>
-			              <td> {{ $receipt->amount }} </td>
+						  <td> {{ optional($receipt->admin)->name }} </td>
 			              <td> {{ $receipt->date }} </td>
+						  <td class="text-right"> {{ $receipt->amount }} </td>
                           <td> {{ $receipt->note }} </td>
 			              <td class="text-right">
-			              	<form method="POST" action=" {{ route('users.destroy', ['user' => $user->id]) }} ">
+			              	<form method="POST" action=" {{ route('user.receipts.destroy', ['id' => $user->id,'receipt_id'=>$receipt->id]) }} ">
 			              		<a class="btn btn-primary btn-sm" href="{{ route('users.show', ['user' => $user->id]) }}"> 
 				              	 	<i class="fa fa-eye"></i> 
 				              	</a>

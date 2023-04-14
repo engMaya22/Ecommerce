@@ -15,7 +15,9 @@
 			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#newPayment">
 				<i class="fa fa-plus"></i>New Payment
 			</button>
-			<a class="btn btn-info" href="{{ url('users/create') }}"> <i class="fa fa-plus"></i> New Receipt </a>
+			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#newReceipt">
+				<i class="fa fa-plus"></i>New Receipt
+			</button>
 		</div>
 	</div>
 	<div class="row clearfix mt-5 page_content">
@@ -45,6 +47,103 @@
 					
 			
 
+{{-- form to add payment --}}
+  <!-- Modal -->
+  <div class="modal fade" id="newPayment" tabindex="-1" role="dialog" aria-labelledby="newPaymentLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	 {!! Form::open(['route' => ['user.payments.store',$user->id], 'method' => 'post']) !!}
+       <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="newPaymentLabel">New Payment</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+			<div class="form-group row">
+				<label for="date" class="col-sm-3 col-form-label">Date <span class="text-danger">*</span> </label>
+				<div class="col-sm-9">
+					{{ Form::date('date', NULL, [ 'class'=>'form-control', 'id' => 'date', 'placeholder' => 'Date' ,'required']) }}
+					<span class="text-danger">
+					{{$errors->first('date')}}
+					</span>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="amount" class="col-sm-3 col-form-label"> Amount <span class="text-danger">*</span>  </label>
+				<div class="col-sm-9">
+					{{ Form::text('amount', NULL, [ 'class'=>'form-control', 'id' => 'amount', 'placeholder' => 'Amount' ,'required']) }}
+					<span class="text-danger">
+					{{$errors->first('amount')}}
+					</span>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="note" class="col-sm-3 col-form-label">Note </label>
+				<div class="col-sm-9">
+					{{ Form::textarea('note', NULL, [ 'class'=>'form-control', 'id' => 'note','rows' => '3', 'placeholder' => 'Note' ]) }}
+				
+				</div>
+			</div>
+			<input name= 'user_id' type="text" hidden value= {{$user->id}}>
 	 
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+	  </div>
+	  {!! Form::close() !!}
+	 </div>
+  </div>
+  	
+  <!-- Modal for Receipt -->
+  <div class="modal fade" id="newReceipt" tabindex="-1" role="dialog" aria-labelledby="newReceiptLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	 {!! Form::open(['route' => ['user.receipts.store',$user->id], 'method' => 'post']) !!}
+       <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="newReceiptLabel">New Receipt</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+			<div class="form-group row">
+				<label for="date" class="col-sm-3 col-form-label">Date <span class="text-danger">*</span> </label>
+				<div class="col-sm-9">
+					{{ Form::date('date', NULL, [ 'class'=>'form-control', 'id' => 'date', 'placeholder' => 'Date' ,'required']) }}
+					<span class="text-danger">
+					{{$errors->first('date')}}
+					</span>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="amount" class="col-sm-3 col-form-label"> Amount <span class="text-danger">*</span>  </label>
+				<div class="col-sm-9">
+					{{ Form::text('amount', NULL, [ 'class'=>'form-control', 'id' => 'amount', 'placeholder' => 'Amount' ,'required']) }}
+					<span class="text-danger">
+					{{$errors->first('amount')}}
+					</span>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="note" class="col-sm-3 col-form-label">Note </label>
+				<div class="col-sm-9">
+					{{ Form::textarea('note', NULL, [ 'class'=>'form-control', 'id' => 'note','rows' => '3', 'placeholder' => 'Note' ]) }}
+				
+				</div>
+			</div>
+			<input name= 'user_id' type="text" hidden value= {{$user->id}}>
+	 
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+	  </div>
+	  {!! Form::close() !!}
+	 </div>
+  </div>
 @stop
  
