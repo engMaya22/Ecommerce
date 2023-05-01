@@ -36,6 +36,15 @@ Route::group(['middleware'=> 'auth'],function(){
     
     Route::resource('users', UserController::class);
     Route::get('user/{id}/sales',[UserSalesController::class , 'index'])->name('user.sales');
+   
+    Route::post('users/{id}/invoices', 							[UserSalesController::class , 'createInvoice'])->name('user.sales.store');
+    Route::get('users/{id}/invoices/{invoice_id}', 				[UserSalesController::class,'invoice'])->name('user.sales.invoice_details');
+    Route::delete('users/{user_id}/invoices/{invoice_id}', 			[UserSalesController::class,'destroyInvoice'])->name('user.sales.destroy');
+    Route::post('users/{user_id}/invoices/{invoice_id}' , 			[UserSalesController::class, 'addItem'])->name('user.sales.invoices.add_item');
+    Route::delete('users/{user_id}/invoices/{invoice_id}/{item_id}', [UserSalesController::class ,'destroyItem'])->name('user.sales.invoices.delete_item');
+
+    
+
 
     Route::get('user/{id}/purchases',[UserPurchaseController::class , 'index'])->name('user.purchases');
 

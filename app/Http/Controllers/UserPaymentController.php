@@ -22,12 +22,10 @@ class UserPaymentController extends Controller
 
     }
     public function store(PaymentRequest $request ,$user_id){
-        $request['admin_id']  = Auth::id();
         if( Payment::create($request->all())){
          Session::flash('message','Payments Added Successfully');
         }
-        // $user = $request->user_id;
-        return  redirect()->route('user.payments',$user_id);
+        return  to_route('user.payments',$user_id);
     }
 
     public function destroy($id,$payment_id){

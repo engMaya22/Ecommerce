@@ -4,3 +4,12 @@
 .page_content{
    
 }
+.no_padding{
+   padding: 0px !important;
+}
+.no_margin{
+   margin: 0px ;
+}
+.invoice_items{
+    margin: 30px 5px 20px 5px;
+}

@@ -23,7 +23,7 @@ class UserReceiptController extends Controller
     }
     public function store(ReceiptRequest $request ,$user_id){
 
-        $request['admin_id']  = Auth::id();
+        
         if( Receipt::create($request->all())){
          Session::flash('message','Payments Added Successfully');
         }
@@ -35,6 +35,6 @@ class UserReceiptController extends Controller
             Session::flash('message', 'Receipt Deleted Successfully');
         }
         
-        return redirect()->route('user.receipts',$id);
+        return to_route('user.receipts',$id);
     }
 }

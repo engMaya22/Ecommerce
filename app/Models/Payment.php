@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Payment extends Model
 {
@@ -11,6 +12,14 @@ class Payment extends Model
     protected $fillable = [
         'amount' , 'date' , 'note' , 'user_id','admin_id'
     ];
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function ($model) {
+           $model->admin_id = Auth::id();
+        });
+       
+    }
     public function admin(){
         return $this->belongsTo(Admin::class);
     }

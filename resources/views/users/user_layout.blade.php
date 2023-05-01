@@ -7,7 +7,9 @@
 			<a class="btn btn-primary" href="{{ route('users.index') }}"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Back </a>
 		</div>	
 		<div class="col-md-8 text-right">
-			<a class="btn btn-info" href="{{ url('users/create') }}"> <i class="fa fa-plus"></i> New Sale </a>
+			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#newSale">
+				<i class="fa fa-plus"></i>New Sale Invoice
+			</button>
 			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#newPurchase">
 				<i class="fa fa-plus"></i>New Purchase
 			</button>
@@ -137,6 +139,56 @@
 			<input name= 'user_id' type="text" hidden value= {{$user->id}}>
 	 
 		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+	  </div>
+	  {!! Form::close() !!}
+	 </div>
+  </div>
+
+  {{-- form to add Invoice --}}
+  <!-- Modal -->
+  <div class="modal fade" id="newSale" tabindex="-1" role="dialog" aria-labelledby="newSaleLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	 {!! Form::open(['route' => ['user.sales.store',$user->id], 'method' => 'post']) !!}
+       <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="newSaleLabel">New Sale Invoice</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+			<div class="form-group row">
+				<label for="date" class="col-sm-3 col-form-label">Date <span class="text-danger">*</span> </label>
+				<div class="col-sm-9">
+					{{ Form::date('date', NULL, [ 'class'=>'form-control', 'id' => 'date', 'placeholder' => 'Date' ,'required']) }}
+					<span class="text-danger">
+					{{$errors->first('date')}}
+					</span>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="challan_no" class="col-sm-3 col-form-label"> Challan Number  </label>
+				<div class="col-sm-9">
+					{{ Form::text('challan_no', NULL, [ 'class'=>'form-control', 'id' => 'challan_no', 'placeholder' => 'Challan Number' ]) }}
+					<span class="text-danger">
+					</span>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="note" class="col-sm-3 col-form-label">Note </label>
+				<div class="col-sm-9">
+					{{ Form::textarea('note', NULL, [ 'class'=>'form-control', 'id' => 'note','rows' => '3', 'placeholder' => 'Note' ]) }}
+				
+				</div>
+			</div>
+			
+			<input name= 'user_id' type="text" hidden value= {{$user->id}}>
+	 
+		   </div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 		  <button type="submit" class="btn btn-primary">Submit</button>
